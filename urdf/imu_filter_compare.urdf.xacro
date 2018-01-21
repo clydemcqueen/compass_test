@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot name="imu_test" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <material name="blue">
+    <color rgba="0 0 0.8 0.5"/>
+  </material>
+  <material name="green">
+    <color rgba="0 0.8 0 0.5"/>
+  </material>
+  <material name="red">
+    <color rgba="0.8 0 0 0.5"/>
+  </material>
+  <material name="clear">
+    <color rgba="0 0 0 0"/>
+  </material>
+
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <link name="base_link"/>
+
+  <link name="imu_link_stateless">
+    <visual>
+      <geometry>
+        <box size="0.03 0.05 0.001"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+
+  <joint name="base_imu_stateless" type="floating">
+    <parent link="base_link"/>
+    <child link="imu_link_stateless"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+
+  <link name="imu_link_madgwick">
+    <visual>
+      <geometry>
+        <box size="0.03 0.05 0.001"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <joint name="base_imu_madgwick" type="floating">
+    <parent link="base_link"/>
+    <child link="imu_link_madgwick"/>
+    <origin xyz="0.1 -0.025 0.06" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link_complementary">
+    <visual>
+      <geometry>
+        <box size="0.03 0.05 0.001"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <joint name="base_imu_complementary" type="floating">
+    <parent link="base_link"/>
+    <child link="imu_link_complementary"/>
+    <origin xyz="-0.1 0 0" rpy="0 0 0"/>
+  </joint>
+
+</robot>
